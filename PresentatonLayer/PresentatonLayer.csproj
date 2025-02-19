@@ -67,22 +67,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FormClients\ClientesForm.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="index.aspx" />
+    <Content Include="Form Login\LoginForm.aspx" />
     <Content Include="principal.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Administracion.aspx" />
+    <Content Include="FormAdmin\Administracion.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormClients\ClientesForm.aspx.cs">
+      <DependentUpon>ClientesForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormClients\ClientesForm.aspx.designer.cs">
+      <DependentUpon>ClientesForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Form Login\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Form Login\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="principal.aspx.cs">
       <DependentUpon>principal.aspx</DependentUpon>
@@ -92,11 +100,11 @@
       <DependentUpon>principal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Administracion.aspx.cs">
+    <Compile Include="FormAdmin\Administracion.aspx.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion.aspx.designer.cs">
+    <Compile Include="FormAdmin\Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -111,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Form Users\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

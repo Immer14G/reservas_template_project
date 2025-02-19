@@ -38,7 +38,10 @@
 <body>
     <form id="form1" runat="server" class="container">
         <h1>Bienvenidos a Administración de Habitaciones</h1>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Administración ir" CssClass="btn-primary" Width="300px" />
+        <asp:Button ID="BtnHabitaciones" runat="server" OnClick="Button1_Click" Text="Administración ir" CssClass="btn-primary" Width="300px" /><br />
+          <asp:Button ID="BtnClientes" runat="server" OnClick="Button1_Click1" Text="Clientes ir" CssClass="btn-primary" Width="300px"  />
+        <p>
+            &nbsp;</p>
     </form>
 </body>
 </html>

@@ -29,7 +29,7 @@ namespace PresentatonLayer
 
                 if (resultado == "OK")
                 {
-                    Response.Redirect("principal.aspx");
+                    Response.Redirect("/principal.aspx");
                 }
                 else
                 {

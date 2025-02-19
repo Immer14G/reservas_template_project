@@ -24,19 +24,17 @@
                 OnRowEditing="gvHabitaciones_RowEditing"
                 OnRowUpdating="gvHabitaciones_RowUpdating"
                 OnRowCancelingEdit="gvHabitaciones_RowCancelingEdit"
-                OnRowDeleting="gvHabitaciones_RowDeleting"
-                CssClass="table table-striped table-bordered">
+                OnRowDeleting="gvHabitaciones_RowDeleting">
                 <Columns>
-                    <asp:BoundField DataField="id_habitaciones" HeaderText="ID" />
-                    <asp:BoundField DataField="numero" HeaderText="Número" />
-                    <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
-                    <asp:BoundField DataField="huespedes" HeaderText="Huéspedes" />
-                    <asp:BoundField DataField="id_usuario" HeaderText="ID Usuario" />
-                    <asp:CommandField ShowEditButton="True" EditText="Editar" />
-                    <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" />
+                    <asp:BoundField DataField="id_habitaciones" HeaderText="id_habitaciones" />
+                    <asp:BoundField DataField="numero" HeaderText="numero" />
+                    <asp:BoundField DataField="descripcion" HeaderText="descripcion" />
+                    <asp:BoundField DataField="huespedes" HeaderText="huespedes"  />
+                    <asp:BoundField DataField="id_usuario" HeaderText="id_usuario" />
+                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 </Columns>
             </asp:GridView>
-        </div>
+            </div>
 
         <div class="card p-4 mt-4">
             <h2 class="text-center">Agregar Nueva Habitación</h2>
