@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="FormClients\ClientesForm.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Form Login\LoginForm.aspx" />
+    <Content Include="FormClients\LoginForm.aspx" />
     <Content Include="principal.aspx" />
     <Content Include="Web.config" />
     <Content Include="FormAdmin\Administracion.aspx" />
@@ -85,11 +85,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Form Login\LoginForm.aspx.cs">
+    <Compile Include="FormClients\LoginForm.aspx.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Form Login\LoginForm.aspx.designer.cs">
+    <Compile Include="FormClients\LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="principal.aspx.cs">
