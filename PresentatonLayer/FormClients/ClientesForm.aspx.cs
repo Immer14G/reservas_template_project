@@ -103,9 +103,11 @@ namespace PresentatonLayer
             }
         }
 
-        protected void btnVolver_click(object sender, EventArgs e)
+       
+
+        protected void btnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("principal.aspx");
+            Response.Redirect("../principal.aspx");
         }
     }
 }
