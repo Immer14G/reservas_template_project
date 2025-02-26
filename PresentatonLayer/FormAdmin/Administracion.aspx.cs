@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BussinesLayer;
-
 
 namespace PresentatonLayer
 {
@@ -20,7 +16,6 @@ namespace PresentatonLayer
             {
                 CargarHabitaciones();
                 CargarUsuarios();
-                
             }
         }
 
@@ -40,20 +35,31 @@ namespace PresentatonLayer
 
         protected void btnAgregar_click(object sender, EventArgs e)
         {
-            int numero = Convert.ToInt32(txtNumero.Text);
+            if (string.IsNullOrWhiteSpace(txtNumero.Text) || string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
+                string.IsNullOrWhiteSpace(txtHuespedes.Text) || DdlUsuario.SelectedIndex == -1)
+            {
+                MostrarAlerta("Por favor complete todos los campos.");
+                return;
+            }
+
+            int numero, huespedes;
+            if (!int.TryParse(txtNumero.Text, out numero) || !int.TryParse(txtHuespedes.Text, out huespedes) || numero <= 0 || huespedes <= 0)
+            {
+                MostrarAlerta("El número de habitación y los huéspedes deben ser números positivos.");
+                return;
+            }
+
             string descripcion = txtDescripcion.Text;
-            int huespedes = Convert.ToInt32(txtHuespedes.Text);
             int idUsuario = int.Parse(DdlUsuario.SelectedValue);
 
-            bool exito = negocioHabitaciones.AgregarHabitacion(numero, descripcion, huespedes, idUsuario);
-            if (exito)
+            if (negocioHabitaciones.AgregarHabitacion(numero, descripcion, huespedes, idUsuario))
             {
-                Response.Write("<script>alert('Habitación agregada con éxito');</script>");
+                MostrarAlerta("Habitación agregada con éxito");
                 CargarHabitaciones();
             }
             else
             {
-                Response.Write("<script>alert('Error al agregar la habitación');</script>");
+                MostrarAlerta("Error al agregar la habitación");
             }
         }
 
@@ -62,16 +68,23 @@ namespace PresentatonLayer
             gvHabitaciones.EditIndex = e.NewEditIndex;
             CargarHabitaciones();
         }
-        protected void gvHabitaciones_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+
+        protected void gvHabitaciones_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int id = Convert.ToInt32(gvHabitaciones.DataKeys[e.RowIndex].Value);
             GridViewRow row = gvHabitaciones.Rows[e.RowIndex];
 
-            int numero = int.Parse((row.Cells[1].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
-            string descripcion = (row.Cells[2].Controls[0] as System.Web.UI.WebControls.TextBox).Text;
+            int numero, huespedes, idUsuario;
+            string descripcion = (row.Cells[2].Controls[0] as TextBox).Text;
 
-            int huespedes = int.Parse((row.Cells[3].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
-            int idUsuario = int.Parse((row.Cells[4].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
+            if (!int.TryParse((row.Cells[1].Controls[0] as TextBox).Text, out numero) ||
+                !int.TryParse((row.Cells[3].Controls[0] as TextBox).Text, out huespedes) ||
+                !int.TryParse((row.Cells[4].Controls[0] as TextBox).Text, out idUsuario) ||
+                numero <= 0 || huespedes <= 0)
+            {
+                MostrarAlerta("Los valores ingresados deben ser válidos y positivos.");
+                return;
+            }
 
             if (negocioHabitaciones.ModificarHabitacion(id, numero, descripcion, huespedes, idUsuario))
             {
@@ -88,13 +101,21 @@ namespace PresentatonLayer
 
         protected void gvHabitaciones_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-          
-                int id = Convert.ToInt32(gvHabitaciones.DataKeys[e.RowIndex].Value);
-                if (negocioHabitaciones.EliminarHabitacion(id))
-                {
-                    CargarHabitaciones();
-                
+            int id = Convert.ToInt32(gvHabitaciones.DataKeys[e.RowIndex].Value);
+            if (negocioHabitaciones.EliminarHabitacion(id))
+            {
+                CargarHabitaciones();
             }
+        }
+
+        protected void btnSalir_click(object sender, EventArgs e)
+        {
+            Response.Redirect("../principal.aspx");
+        }
+
+        private void MostrarAlerta(string mensaje)
+        {
+            Response.Write($"<script>alert('{mensaje}');</script>");
         }
     }
 }

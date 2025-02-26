@@ -1,6 +1,5 @@
 ﻿using BussinesLayer;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +10,7 @@ namespace PresentatonLayer
     public partial class ClientesForm : System.Web.UI.Page
     {
         NegocioCliente negocioCliente = new NegocioCliente();
-
+        NegocioUsuario negocioUsuario = new NegocioUsuario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,13 +23,18 @@ namespace PresentatonLayer
                 if (!IsPostBack)
                 {
                     CargarCliente();
+                    CargarUsuarios();
                 }
             }
-
-
         }
-            
-        
+
+        protected void CargarUsuarios()
+        {
+            DdlUsuario.DataSource = negocioUsuario.obtenerUsuario();
+            DdlUsuario.DataTextField = "usuario";
+            DdlUsuario.DataValueField = "id";
+            DdlUsuario.DataBind();
+        }
 
         protected void CargarCliente()
         {
@@ -38,28 +42,31 @@ namespace PresentatonLayer
             gvClientes.DataBind();
         }
 
-
         protected void btnAgregar_click(object sender, EventArgs e)
         {
-            string nombre = txtNombre.Text;
-            string dui = txtDui.Text;
-            string telefono = txtTelefono.Text;
-            string correo = txtCorreo.Text;
-            string departamento = txtDepartamento.Text;
+            string nombre = txtNombre.Text.Trim();
+            string dui = txtDui.Text.Trim();
+            string telefono = txtTelefono.Text.Trim();
+            string correo = txtCorreo.Text.Trim();
+            string departamento = txtDepartamento.Text.Trim();
             DateTime fecha_registro = DateTime.Now;
-            int usuario = Convert.ToInt32(txtusuario.Text);
+            int usuario = 0;
 
+            // Validación simple en línea
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(dui) ||
+                string.IsNullOrWhiteSpace(telefono) || string.IsNullOrWhiteSpace(correo) ||
+                string.IsNullOrWhiteSpace(departamento) || DdlUsuario.SelectedIndex == -1 ||
+                !int.TryParse(DdlUsuario.SelectedValue, out usuario) ||
+                dui.Length != 10 || !dui.Contains("-") || telefono.Length != 8 ||
+                !telefono.All(char.IsDigit) || !correo.Contains("@"))
+            {
+                MostrarAlerta("Por favor ingrese datos válidos en todos los campos.");
+                return;
+            }
 
-            bool exito = negocioCliente.AgregarCliente(nombre, dui,telefono, correo,  departamento,  fecha_registro, usuario);
-            if (exito)
-            {
-                Response.Write("<script>alert('Cliente agregada con éxito');</script>");
-                CargarCliente();
-            }
-            else
-            {
-                Response.Write("<script>alert('Error al agregar el cliente');</script>");
-            }
+            bool exito = negocioCliente.AgregarCliente(nombre, dui, telefono, correo, departamento, fecha_registro, usuario);
+            MostrarAlerta(exito ? "Cliente agregado con éxito" : "Error al agregar el cliente");
+            if (exito) CargarCliente();
         }
 
         protected void gvClientes_RowEditing(object sender, GridViewEditEventArgs e)
@@ -67,22 +74,36 @@ namespace PresentatonLayer
             gvClientes.EditIndex = e.NewEditIndex;
             CargarCliente();
         }
-        protected void gvClientes_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+
+        protected void gvClientes_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int id = Convert.ToInt32(gvClientes.DataKeys[e.RowIndex].Value);
             GridViewRow row = gvClientes.Rows[e.RowIndex];
 
-            string nombre = ((row.Cells[1].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
-            string dui = (row.Cells[2].Controls[0] as System.Web.UI.WebControls.TextBox).Text;
-            string telefono =((row.Cells[3].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
-            string correo= (row.Cells[4].Controls[0] as System.Web.UI.WebControls.TextBox).Text;
-            string departamento = ((row.Cells[5].Controls[0] as System.Web.UI.WebControls.TextBox).Text);
-           
+            string nombre = ((row.Cells[1].Controls[0] as TextBox).Text).Trim();
+            string dui = (row.Cells[2].Controls[0] as TextBox).Text.Trim();
+            string telefono = ((row.Cells[3].Controls[0] as TextBox).Text).Trim();
+            string correo = (row.Cells[4].Controls[0] as TextBox).Text.Trim();
+            string departamento = ((row.Cells[5].Controls[0] as TextBox).Text).Trim();
 
-            if (negocioCliente.ModificarCliente(id, nombre, dui, telefono,correo, departamento))
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(dui) ||
+                string.IsNullOrWhiteSpace(telefono) || string.IsNullOrWhiteSpace(correo) ||
+                string.IsNullOrWhiteSpace(departamento) || dui.Length != 10 ||
+                !dui.Contains("-") || telefono.Length != 8 || !telefono.All(char.IsDigit) ||
+                !correo.Contains("@"))
+            {
+                MostrarAlerta("Por favor ingrese datos válidos en todos los campos.");
+                return;
+            }
+
+            if (negocioCliente.ModificarCliente(id, nombre, dui, telefono, correo, departamento))
             {
                 gvClientes.EditIndex = -1;
                 CargarCliente();
+            }
+            else
+            {
+                MostrarAlerta("Error al actualizar el cliente.");
             }
         }
 
@@ -94,20 +115,22 @@ namespace PresentatonLayer
 
         protected void gvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
             int id = Convert.ToInt32(gvClientes.DataKeys[e.RowIndex].Value);
             if (negocioCliente.EliminarCliente(id))
             {
                 CargarCliente();
-
             }
         }
 
-       
-
-        protected void btnSalir_Click(object sender, EventArgs e)
+        protected void btnSalir_click(object sender, EventArgs e)
         {
             Response.Redirect("../principal.aspx");
+        }
+
+        // Función auxiliar para mostrar alertas
+        private void MostrarAlerta(string mensaje)
+        {
+            Response.Write($"<script>alert('{mensaje}');</script>");
         }
     }
 }

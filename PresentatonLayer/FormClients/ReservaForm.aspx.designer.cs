@@ -11,7 +11,7 @@ namespace PresentatonLayer
 {
 
 
-    public partial class WebForm1
+    public partial class ReservaForm
     {
 
         /// <summary>
@@ -24,75 +24,84 @@ namespace PresentatonLayer
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control txtNumero.
+        /// Control ddlClientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumero;
+        protected global::System.Web.UI.WebControls.DropDownList ddlClientes;
 
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control ddlHabitaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHabitaciones;
 
         /// <summary>
-        /// Control txtHuespedes.
+        /// Control rblDescuento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHuespedes;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblDescuento;
 
         /// <summary>
-        /// Control DdlUsuario.
+        /// Control txtFechaInicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
 
         /// <summary>
-        /// Control btnAgregar.
+        /// Control txtFechaFin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFin;
 
         /// <summary>
-        /// Control gvHabitaciones.
+        /// Control btnCalcular.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvHabitaciones;
+        protected global::System.Web.UI.WebControls.Button btnCalcular;
 
         /// <summary>
-        /// Control SqlDataSource1.
+        /// Control btnGuardarReserva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Button btnGuardarReserva;
 
         /// <summary>
-        /// Control btnSalir.
+        /// Control lblTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalir;
+        protected global::System.Web.UI.WebControls.Label lblTotal;
+
+        /// <summary>
+        /// Control gvReservas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvReservas;
     }
 }

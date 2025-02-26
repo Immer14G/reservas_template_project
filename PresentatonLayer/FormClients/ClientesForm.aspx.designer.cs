@@ -87,13 +87,13 @@ namespace PresentatonLayer
         protected global::System.Web.UI.WebControls.TextBox txtf;
 
         /// <summary>
-        /// Control txtusuario.
+        /// Control DdlUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtusuario;
+        protected global::System.Web.UI.WebControls.DropDownList DdlUsuario;
 
         /// <summary>
         /// Control btnAgregarCliente.

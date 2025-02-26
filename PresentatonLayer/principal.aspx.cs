@@ -20,5 +20,10 @@ namespace PresentatonLayer
         {
             Response.Redirect("./FormCLients/ClientesForm.aspx");
         }
+
+        protected void Button2_Click2(object sender, EventArgs e)
+        {
+            Response.Redirect("./FormCLients/ReservaForm.aspx");
+        }
     }
 }

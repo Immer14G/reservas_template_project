@@ -26,7 +26,7 @@ namespace PresentatonLayer
 
             if (resultado == "OK")
             {
-                // Establece la sesión antes de redirigir
+              
                 Session["Usuario"] = usuario;
                 Response.Redirect("/principal.aspx");
             }

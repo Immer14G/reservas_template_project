@@ -71,6 +71,7 @@
     <Content Include="Global.asax" />
     <Content Include="FormClients\LoginForm.aspx" />
     <Content Include="principal.aspx" />
+    <Content Include="FormClients\ReservaForm.aspx" />
     <Content Include="Web.config" />
     <Content Include="FormAdmin\Administracion.aspx" />
   </ItemGroup>
@@ -107,6 +108,13 @@
     <Compile Include="FormAdmin\Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormClients\ReservaForm.aspx.cs">
+      <DependentUpon>ReservaForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormClients\ReservaForm.aspx.designer.cs">
+      <DependentUpon>ReservaForm.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -117,11 +125,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Form Users\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BussinesLayer\BussinesLayer.csproj">
       <Project>{a9e6b709-0415-4839-9b48-93d7c186d832}</Project>

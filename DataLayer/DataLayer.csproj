@@ -45,6 +45,7 @@
     <Compile Include="Habitaciones.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reservacion.cs" />
     <Compile Include="usuarios.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
